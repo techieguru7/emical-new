@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html,
+body {
+  height: 100%;
+  background-color: #cad8ed!important;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* .mat-mdc-card {
+  background-color: white !important;
+  color: black;
+} */
+
+.standard-bg{
+    background-color: #0d6efd;
+    color: white;
+}
+

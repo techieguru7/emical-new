@@ -1,0 +1,266 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container1 {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--bs-blue);
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555555;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    transition: border-color 0.3s ease;
+    border: 1px solid #0d6efd;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[readonly] {
+    background-color: #f7f7f7;
+    cursor: not-allowed;
+}
+
+/* Additional Styles for Result */
+#emiResult {
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.form-group,
+button,
+#emiResult {
+    animation: fadeIn 1s ease;
+}
+
+canvas{
+
+    width:290px !important;
+    height:290px !important;
+    display: inline !important;
+  
+  }
+  .tab{
+    padding: 15px;
+    height: 250px;
+    overflow-y: auto;
+    max-height: 250px;
+  }
+  .emi-txt {
+    color: dodgerblue;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 4px;
+    margin: 0px;
+  }
+
+  .emi {
+    font-size: 32px;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    color: var(--bs-form-valid-color);
+    font-weight: 600;
+  }
+  .currency-txt {
+    font-size: 30px;
+    font-family: ui-rounded;
+  }
+  .info-pay {
+    font-size: 16px;
+    color: dodgerblue;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Basic styles for the dropdown button */
+.dropdown-btn {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style for the dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Show the dropdown content on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Style each option/link within the dropdown */
+  .dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Change the background color of options on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Change the color of options when clicked */
+  .dropdown-content a:active {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .duration-input {
+    padding-right: 80px; /* Adjust this value to make space for the buttons */
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .year-button,
+  .month-button {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 5px 10px;
+    border: none;
+    background-color: lightblue;
+    color: black;
+    cursor: pointer;
+    border-radius: 0px;
+  }
+  
+  .year-button {
+    right:0;
+  }
+  
+  .month-button {
+    right: 56px;
+  }
+  .active{
+    background-color:blue;
+    color: white;
+  }
+  .tenure-info{
+    padding-top: 5px;
+    font-size: 12px;
+    color: cornflowerblue;
+  }
+  
+  /* Add your custom styles here */
+mat-select {
+    font-size: 12px !important; /* Decrease the font size as needed */
+  }
+  
+  mat-form-field {
+    width: 179px; /* Adjust the width of the form field as needed */
+    height: 72px;
+  }
+  
+  .mat-form-field-infix {
+    padding-top: 4px; /* Adjust the top padding of the input field as needed */
+    padding-bottom: 4px; /* Adjust the bottom padding of the input field as needed */
+  }
+  
+  .mat-option {
+    font-size: 12px; /* Decrease the font size of the options as needed */
+    height: 24px; /* Adjust the height of the options as needed */
+  }
+  
+  .mat-option.mat-selected {
+    background-color: #e3e3e3; /* Customize the background color of the selected option */
+  }
+  .currency-css{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .currency{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 4px;
+    font-weight: 500;
+  }
+
+  .payable{
+    color: var(--bs-form-valid-color);
+    font-weight: 600;
+  }
+  .numTowords{
+    margin-bottom: 0px;
+    margin-left: 5px;
+    color: var(--bs-blue);
+    font-size: 12px;
+    font-family: monospace;
+  }
+  
+  

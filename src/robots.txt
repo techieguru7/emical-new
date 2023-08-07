@@ -1,0 +1,4 @@
+
+User-agent: *
+Disallow: /private/
+Sitemap: https://emical.net/sitemap.xml

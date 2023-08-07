@@ -1,0 +1,16 @@
+.img-logo{
+ 
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 40px;
+    }
+  
+    @media only screen and (min-width: 768px) {
+    .navbar-height{
+      height: 60px;
+    }
+  }
+  .shadow-nav{
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)
+  }

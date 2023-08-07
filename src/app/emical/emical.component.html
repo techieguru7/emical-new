@@ -1,0 +1,118 @@
+<div class="conatiner">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="container1">
+                <h1>EMI Calculator</h1>
+                <mat-tab-group (selectedTabChange)="tabChange($event)">
+                    <mat-tab label="Home Loan"> </mat-tab>
+                    <mat-tab label=" Personal Loan"> </mat-tab>
+                    <mat-tab label="Car Loan"> </mat-tab>
+                </mat-tab-group>
+                
+                <div class="currency-css">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Currency</mat-label>
+                        <mat-select [(ngModel)]="selectedCurrency">
+                            <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency
+                                }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount</label>
+                    <!-- <span class="currency">{{ selectedCurrency | currencySymbol }}</span> -->
+                    <input type="number" (input)="calculate()" appCommaSeparator [(ngModel)]="amount" mode="decimal"
+                        locale="en-IN" maxlength="12" inputId="minmax" id="loanAmount" name="loanAmount" required>
+                    <p class="numTowords">{{ amount | numberToWords }}</p>
+                    <br>
+                    <!-- <label for="loanTenureSlider">Loan Tenure (months):</label> -->
+                    <!-- <input type="range" id="loanTenureSlider" style="width: 100%;" [(ngModel)]="amount" min="100000" step="100000" max="10000000000000"> -->
+                    <!-- Slider -->
+                    <input type="range" style="width: 100%;" ngDefaultControl (mouseup)="calculate()"
+                        (input)="inputUpdate($event.target)" [(ngModel)]="amount" max="100000000" step="50000" discrete>
+
+                    <!--  -->
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate">Interest Rate (%)</label>
+                    <input type="number" [(ngModel)]="interestRate" (input)="calculate()" id="interestRate"
+                        name="interestRate" required>
+                    <!-- Slider -->
+                    <!-- <mat-slider min="0" style="width: 100%;" max="100000" step="1000" discrete [displayWith]="formatLabel">
+                        <input matSliderThumb>
+                    </mat-slider> -->
+
+                    <!--  -->
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="loanTenure">Loan Tenure (in Years)</label>
+                    <input type="number" [(ngModel)]="tenure" maxlength="2" pattern="[1-9]{1}[0-9]{9}"
+                        (input)="calculate()" id="loanTenure" name="loanTenure" required> -->
+                    <label for="loanTenure">Loan Tenure ({{tenureVal}})</label>
+                    <div class="input-container">
+                        <input type="number" id="duration" class="duration-input" [(ngModel)]="tenure" maxlength="3"
+                            (input)="calculate()" />
+                        <button class="month-button" [class.active]="tenureVal=='Months'"
+                            (click)="setYearsMonths('Months')">Months</button>
+                        <button class="year-button" [class.active]="tenureVal=='Years'"
+                            (click)="setYearsMonths('Years')">Years</button>
+                    </div>
+                    <p class="tenure-info" *ngIf="tenureVal=='Months'">Tenure Cannot be more than 360 Months</p>
+                    <!-- Hide the element if the condition is false -->
+                    <p class="tenure-info" *ngIf="tenureVal=='Years'">Tenure cannot be more than 30 Years </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="container1">
+                <div class="text-center">
+                    <canvas class="text-center" id="myChart"></canvas>
+                </div>
+                <h2 class="text-center emi-txt">Your Monthly EMI will be</h2><br>
+                <p class="emi" *ngIf="emi > 0"><span class="currency-txt"></span> {{emi| currency:
+                    selectedCurrency:'symbol':'1.0-0'}}</p><br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="info-pay text-center">Interest Payable :</p>
+                        <p class="text-center payable"> {{totalInterest | currency: selectedCurrency:'symbol':'1.0-0'}}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="info-pay text-center">Total Payable:</p>
+                        <p class="text-center payable"> {{totalPayable | currency: selectedCurrency:'symbol':'1.0-0'}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+</div><br><br>
+<div class="tab conatiner">
+    <table class="table table-responsive table-hover table-bordered">
+        <thead class="table-dark">
+            <tr class="text-center" style="--bs-table-bg-type: #0d6efd;">
+                <th scope="col">Months</th>
+                <!-- <th scope="col">Extra EMI</th> -->
+                <th scope="col">Principal</th>
+                <th scope="col">Interest</th>
+                <th scope="col">Total Paid</th>
+                <th scope="col">Balance</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let item of table_list;let i=index">
+                <th scope="row">{{i+1}}</th>
+                <!-- <td>{{item.extraEmi}}</td> -->
+                <td>{{item.month_principal | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
+                <td>{{item.monthly_interest | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
+                <td>{{item.totalPaid | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
+                <td>{{math.trunc(item.balance) | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br><br>
