@@ -14,7 +14,7 @@ export class EmicalComponent implements OnInit {
   chartData: number[] = [];
   chartDatalabels: any[] = [];
   tabval = 0;
-
+  yearsArray:any = []
   min = 100000;
   max = 10000000;
   math = Math;
@@ -27,7 +27,7 @@ export class EmicalComponent implements OnInit {
 
   @Input() amount = 5000000;
   @Input() interestRate = 9
-  @Input() tenure = 20;
+  @Input() tenure = 1;
   @Input() emi = 0;
   @Input() extraPreEmi = 1;
   tenureInMonths: any
@@ -127,12 +127,24 @@ export class EmicalComponent implements OnInit {
       this.monthly_principal_amount = this.emi - this.monthly_interest_amount;
 
       this.balance_principal = this.balance_principal - this.monthly_principal_amount;
-
-
-
+      
       this.table_list.push({ 'year': this.monthNames[i - 1], 'monthly_interest': this.monthly_interest_amount, 'month_principal': this.monthly_principal_amount, 'totalPaid': this.monthly_interest_amount + this.monthly_principal_amount, 'balance': this.balance_principal });
     }
-    // console.log(this.table_list)
+    this.yearsArray = this.groupArray(this.table_list, 12);
+    console.log(this.yearsArray)
+     console.log(this.table_list)
+  }
+
+  groupArray(array:any[], groupSize:any) {
+    const groupedArray = [];
+    for (let i = 0; i < array.length; i += groupSize) {
+      const group = [];
+      for (let j = i; j < i + groupSize && j < array.length; j++) {
+        group.push(array[j]);
+      }
+      groupedArray.push(group);
+    }
+    return groupedArray;
   }
 
   pieChartFnc() {

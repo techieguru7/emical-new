@@ -110,7 +110,7 @@
               "outputHashing": "media"
             },
             "development": {
-              "optimization": false,
+              "optimization": true,
               "sourceMap": true,
               "extractLicenses": false,
               "vendorChunk": true
@@ -156,6 +156,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": true
   }
 }
