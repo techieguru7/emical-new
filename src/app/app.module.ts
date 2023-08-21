@@ -10,14 +10,18 @@ import { MaterialExampleModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ArticleComponent
 
-import {Chart} from 'chart.js';
-import { registerables } from 'chart.js';
+
 import { DecimalPipe } from '@angular/common';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { CurrencySymbolPipe } from './cuureny-symbaol.pipe';
+
 import { NumberToWordsPipe } from './number-to-word.pipe';
-Chart.register(...registerables);
+import { ArticleComponent } from './article/article.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ Chart.register(...registerables);
     EmicalComponent,
     ErrorpageComponent,
     CurrencySymbolPipe,
-    NumberToWordsPipe
+    NumberToWordsPipe,
+    ContactFormComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -35,6 +41,8 @@ Chart.register(...registerables);
     MaterialExampleModule,
     FormsModule,
     ReactiveFormsModule,
+    GoogleChartsModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [DecimalPipe],

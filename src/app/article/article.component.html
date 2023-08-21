@@ -1,0 +1,89 @@
+
+<nav class="text-center nav-bg">
+    <ul>
+        <li><a (click)="scrollToSection('how-it-works')">How It Works</a></li>
+        <!-- <li><a href="#emi-calc">What Is EMI Calculator</a></li> -->
+        <li><a (click)="scrollToSection('extra-emi')">Extra EMI</a></li>
+        <li><a (click)="scrollToSection('total-interest')">Total Interest Payable</a></li>
+        <!-- Add more sections as needed -->
+    </ul>
+</nav>
+
+<div class="container">
+    <section id="how-it-works" class="section">
+        <h1>How EMI Calculator App Works</h1>
+        <!-- Add content explaining how the app works -->
+        <p>An EMI (Equated Monthly Installment) is a fixed payment amount made by a borrower to a lender at a specified
+            date
+            each calendar month. It's used to repay a loan, usually including both the principal amount and interest. An
+            EMI
+            Calculator App helps users calculate the EMI amount based on the loan amount, interest rate, and loan
+            tenure.
+        </p>
+
+        <h2>Input Data:</h2>
+        <p>When users open the EMI Calculator App, they are presented with an interface that allows them to input the
+            following
+            data:</p>
+
+        <h2>Loan Amount:</h2>
+        <p>The total amount they want to borrow.
+            Interest Rate: The annual interest rate at which the loan is borrowed.
+            Loan Tenure: The duration of the loan in months or years.</p>
+
+        <h2>Interest Rate:</h2>
+        <p> The annual interest rate at which the loan is borrowed.</p>
+        <h2>Loan Tenure:</h2>
+        <p>The duration of the loan in months or years.</p>
+
+        <h2>Calculation of EMI:</h2>
+        <p> Once the user enters the required data, the app calculates the EMI using the following formula:</p>
+
+        <div class=""> EMI = [P * r * (1 + r)^n] / [(1 + r)^n - 1]</div><br>
+
+        <h4> <b>Where</b>:</h4>
+
+        <p>P is the principal loan amount</p>
+        <p>r is the monthly interest rate (annual rate divided by 12 and then by 100)</p>
+        <p>n is the number of EMIs (loan tenure in months)</p>
+
+        <h2>Display of Results:</h2>
+        <p>The calculated EMI is then displayed to the user, providing a clear understanding of the fixed monthly
+            payment they'll need to make towards repaying the loan.</p>
+
+    </section>
+
+    <!-- <section id="emi-calc" class="section">
+    <h2>What Is EMI Calculator</h2>
+</section> -->
+
+    <section id="extra-emi" class="section">
+        <h2>Extra EMI</h2>
+
+        <p>An Extra EMI is an additional payment made by the borrower on top of the regular EMI. This extra payment goes
+            directly towards reducing the principal amount of the loan.</p>
+        <h4>Annual Extra EMI:</h4>
+        <p>"Extra EMI annually" means that you make these additional payments once a year, usually on the same date or
+            around the anniversary of taking out the loan.</p>
+
+        <h4>Benefits of Extra EMI Annually:</h4>
+
+        <h4>Faster Loan Repayment:</h4>
+        <p>The extra payments reduce the outstanding principal, which in turn decreases the interest accrued on the
+            loan. This leads to a shorter loan tenure.</p>
+        <h4>Reduced Interest Paid:</h4>
+        <p> By paying off the loan faster, you reduce the total interest paid over the loan's lifetime.
+            Financial Freedom: Paying off your loan early gives you more financial freedom and security.</p>
+    </section>
+
+    <section id="total-interest" class="section">
+        <h2>Total Interest Payable</h2>
+        <p>
+            "Total Interest Payable" is a key financial term associated with loans and loan repayment, often used in the
+            context of an EMI calculator. It refers to the cumulative amount of interest that a borrower will pay over
+            the entire duration of a loan, in addition to repaying the principal amount.
+        </p>
+    </section>
+
+</div>
+<!-- Add more sections as needed -->

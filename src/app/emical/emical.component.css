@@ -5,6 +5,9 @@ body {
     padding: 0;
 }
 
+.width-w{
+  width: 100%;
+}
 .container1 {
     max-width: 500px;
     margin: 20px auto;
@@ -18,7 +21,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--bs-blue);
+    color: #3f51b5 !important;
     font-family: sans-serif;
     font-weight: 600;
 }
@@ -27,10 +30,14 @@ h1 {
     margin-bottom: 20px;
 }
 
-label {
+/* label {
     display: block;
     margin-bottom: 8px;
     color: #555555;
+} */
+
+.label-drp{
+  color: #3f51b5;
 }
 
 input[type="number"],
@@ -101,9 +108,9 @@ canvas{
   }
   .tab{
     padding: 15px;
-    height: 250px;
+    height: 500px;
     overflow-y: auto;
-    max-height: 250px;
+    max-height: 500px;
   }
   .emi-txt {
     color: dodgerblue;
@@ -126,10 +133,11 @@ canvas{
   }
   .info-pay {
     font-size: 16px;
-    color: dodgerblue;
-    font-weight: 600;
+    color: #3f51b5 !important;
+    font-weight: 500;
     margin: 0;
     padding: 0;
+    margin-bottom: 5px;
   }
 
   /* Basic styles for the dropdown button */
@@ -153,7 +161,17 @@ canvas{
   .dropdown:hover .dropdown-content {
     display: block;
   }
-  
+  .pad-15p{
+    padding: 15px;
+  }
+  .bg-tabs{
+    --bs-table-bg-type: #3f51b5 !important;
+    font-size: 12px;
+  }
+  .bg-tabs1{
+    /* --bs-table-bg-type: #9ba0f3ed; */
+    font-weight: 500;
+  }
   /* Style each option/link within the dropdown */
   .dropdown-content a {
     display: block;
@@ -169,7 +187,7 @@ canvas{
   
   /* Change the color of options when clicked */
   .dropdown-content a:active {
-    background-color: #3498db;
+    background-color: #3f51b5 !important;
     color: #fff;
   }
   
@@ -177,6 +195,11 @@ canvas{
     display: flex;
     align-items: center;
     position: relative;
+  }
+  .flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .duration-input {
@@ -208,7 +231,7 @@ canvas{
     right: 56px;
   }
   .active{
-    background-color:blue;
+    background-color:#3f51b5 !important;
     color: white;
   }
   .tenure-info{
@@ -252,7 +275,7 @@ mat-select {
   }
 
   .payable{
-    color: var(--bs-form-valid-color);
+    color: white;
     font-weight: 600;
   }
   .numTowords{
@@ -263,4 +286,189 @@ mat-select {
     font-family: monospace;
   }
   
+  .extra-emi{
+    background-color: #007bff;
+    color: white;
+  }
+  .sticky-tab{
+    position: sticky;
+    top: -16px;
+  }
+  .accord-bg{
+    height: 10px;
+    background-color: #b8bacf;
+    margin-top: -15px;
+    color: white;
+  }
+  .cards{
+    margin-bottom: 2px;
+    border-radius: 1px;
+    padding: 4px;
+  }
+  .table-style{
+    margin: 0px;
+  }
+  .tr-stye{
+    font-size: 12px;
+    --bs-table-bg-type: #c5c7ec4f;
+    font-size: 12px;
+  }
+  .heading-h5{
+    margin: 0px;
+  }
+  .table-data{
+    margin: 0px;
+  }
+  .expand-icon::before {
+    cursor: pointer;
+    font-size: 14px;
+  }
   
+  .collapse-icon::before {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* Add this CSS to your stylesheet or component's CSS file */
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: dodgerblue;
+  cursor: pointer;
+}
+
+.custom-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3f51b5 !important;
+  cursor: pointer;
+}
+.row-content{
+  width: 100px;
+}
+.row-content-yr{
+  width: 60px;
+}
+.color-w{
+  color: white;
+  font-weight: 500;
+}
+.expand-icon{
+  height: 14px !important;
+}
+.mat-icon{
+  height: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .row-content{
+    width: 100px !important;
+  }
+  .row-content-yr{
+    width: 80px !important;
+  }
+  .m-remove{
+    display: none;
+  }
+  .tab-cont{
+    padding: 0px !important;
+  }
+  .right-card-top-mrg{
+    margin-top: 35px !important;
+  }
+  .remove-icon-collapse{
+    display: none;
+  }
+}
+.saved-card{
+  background-color: #1f4bbf;
+  border-radius: 0px;
+  padding: 8px
+}
+.custom-chip{
+  padding: 10px 16px 10px 16px;
+    font-weight: 400;
+    font-size: 14px;
+    width: 150px;
+    background-color: #3f51b5 !important;
+}
+
+/* Add some styling to the dropdown */
+.dropdown {
+  display: inline-block;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the select element */
+.dropdown select {
+  padding: 2px 5px 2px 5px;
+  font-size: 14px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  background-color: white;
+}
+
+/* Style the arrow icon */
+.dropdown::after {
+  
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+.label-freq{
+  padding-left: 5px;
+    margin-top: 3px;
+}
+.text-para{
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.dropdown-container {
+  display: flex;
+  align-items: center;
+  margin-left: 10px
+}
+.dropdown-select{
+  width: 100%;
+    padding: 13px;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    transition: border-color 0.3s ease;
+    border: 1px solid #0d6efd;
+}
+select{
+  word-wrap: normal;
+  margin-left: 5px;
+  width: 52px;
+  border-radius: 3px;
+}
+.table-bordered{
+  margin-bottom: 0px;
+}
+
+/* Style the label */
+.dropdown-container label {
+  margin: inherit;
+  font-weight: bold;
+}
+

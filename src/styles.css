@@ -1,5 +1,7 @@
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 
 html,
 body {
@@ -18,7 +20,9 @@ body {
 } */
 
 .standard-bg{
-    background-color: #0d6efd;
+    background-color: #3f51b5;
     color: white;
 }
+
+
 

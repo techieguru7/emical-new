@@ -1,4 +1,10 @@
 <div class="conatiner">
+    <div class="dropdown-container">
+        <label for="dropdown" class="label-drp">Select Currency:</label>
+        <select [(ngModel)]="selectedCurrency">
+            <option *ngFor="let currency of currencies" [value]="currency" [value]="currency">{{currency}}</option>
+        </select>
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="container1">
@@ -7,16 +13,22 @@
                     <mat-tab label="Home Loan"> </mat-tab>
                     <mat-tab label=" Personal Loan"> </mat-tab>
                     <mat-tab label="Car Loan"> </mat-tab>
-                </mat-tab-group>
-                
+                </mat-tab-group><br>
+
                 <div class="currency-css">
-                    <mat-form-field appearance="fill">
+                    <div class="dropdown">
+                        <!-- <select [(ngModel)]="selectedCurrency">
+                            <option *ngFor="let currency of currencies" [value]="currency" [value]="currency">{{currency}}</option>
+                        </select> -->
+                    </div>
+
+                    <!-- <mat-form-field appearance="fill">
                         <mat-label>Select Currency</mat-label>
                         <mat-select [(ngModel)]="selectedCurrency">
                             <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency
                                 }}</mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
                 <div class="form-group">
                     <label for="loanAmount">Loan Amount</label>
@@ -25,11 +37,11 @@
                         locale="en-IN" maxlength="12" inputId="minmax" id="loanAmount" name="loanAmount" required>
                     <p class="numTowords">{{ amount | numberToWords }}</p>
                     <br>
-                    <!-- <label for="loanTenureSlider">Loan Tenure (months):</label> -->
-                    <!-- <input type="range" id="loanTenureSlider" style="width: 100%;" [(ngModel)]="amount" min="100000" step="100000" max="10000000000000"> -->
+
                     <!-- Slider -->
-                    <input type="range" style="width: 100%;" ngDefaultControl (mouseup)="calculate()"
-                        (input)="inputUpdate($event.target)" [(ngModel)]="amount" max="100000000" step="50000" discrete>
+                    <input type="range" class="custom-range width-w" ngDefaultControl (mouseup)="calculate()"
+                        (input)="inputUpdate($event.target)" (touchend)="calculate()" [(ngModel)]="amount"
+                        max="100000000" step="50000" discrete>
 
                     <!--  -->
                 </div>
@@ -47,9 +59,6 @@
                 </div>
 
                 <div class="form-group">
-                    <!-- <label for="loanTenure">Loan Tenure (in Years)</label>
-                    <input type="number" [(ngModel)]="tenure" maxlength="2" pattern="[1-9]{1}[0-9]{9}"
-                        (input)="calculate()" id="loanTenure" name="loanTenure" required> -->
                     <label for="loanTenure">Loan Tenure ({{tenureVal}})</label>
                     <div class="input-container">
                         <input type="number" id="duration" class="duration-input" [(ngModel)]="tenure" maxlength="3"
@@ -64,27 +73,70 @@
                     <p class="tenure-info" *ngIf="tenureVal=='Years'">Tenure cannot be more than 30 Years </p>
 
                 </div>
+
+                <!-- Extra EMI -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="">
+                            <label for="extraEmi">Pay Extra EMI</label>
+                            <input type="number" [(ngModel)]="extraPreEmi" (input)="calculate()" id="extraEmi"
+                                name="extraEmi" required>
+                            <!-- <p class="tenure-info">Extra EMI is calculated at the end of each year</p> -->
+                        </div>
+                        <!-- <div class="col-sm-6 col-xs-12">
+                            <label for="freq" class="label-freq">EMI Frequency</label>
+                            <select class="dropdown-select" (change)="selectFreq()" [(ngModel)]="extraEmiFrequency" id="freq" name="freq">
+                                <option [value]="item.id" *ngFor="let item of frequencydata">{{item.name}}</option>
+                              </select>
+                        </div> -->
+                    </div>
+                    <!--  -->
+                </div>
+                <!--  -->
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="container1">
-                <div class="text-center">
-                    <p class="">kgeh rh</p>
-                    <canvas class="text-center" id="myChart"></canvas>
+            <div class="container1 right-card-top-mrg">
+                <div class="flex-center">
+                    <google-chart [type]="myType" [data]="myData" [options]="myOptions" [width]="width"
+                        [height]="height">
+                    </google-chart>
                 </div>
+                <!-- <canvas class="text-center" id="myChart"></canvas> -->
                 <h2 class="text-center emi-txt">Your Monthly EMI will be</h2><br>
                 <p class="emi" *ngIf="emi > 0"><span class="currency-txt"></span> {{emi| currency:
                     selectedCurrency:'symbol':'1.0-0'}}</p><br>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 text-center">
                         <p class="info-pay text-center">Interest Payable :</p>
-                        <p class="text-center payable"> {{totalInterest | currency: selectedCurrency:'symbol':'1.0-0'}}
-                        </p>
+                        <span class="badge rounded-pill bg-primary custom-chip"> {{TotalInterestPaid | currency:
+                            selectedCurrency:'symbol':'1.0-0'}}</span>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 text-center">
                         <p class="info-pay text-center">Total Payable:</p>
-                        <p class="text-center payable"> {{totalPayable | currency: selectedCurrency:'symbol':'1.0-0'}}
-                        </p>
+                        <span class="badge rounded-pill bg-primary custom-chip">{{TotalPayableAmount | currency:
+                            selectedCurrency:'symbol':'1.0-0'}}</span>
+                    </div>
+                </div><br>
+                <div class="row text-center" *ngIf="extraPreEmi>=0">
+                    <div class="col-md-6 text-center">
+                        <p class="info-pay text-center">Interest Saved</p>
+                        <span class="badge rounded-pill bg-primary custom-chip">{{totalInterest - TotalInterestPaid |
+                            currency:
+                            selectedCurrency:'symbol':'1.0-0'}}</span>
+
+                        <!-- <p class="info-pay text-center">Interest Saved on Extra EMI:</p>
+                            <p class="text-center payable"> {{totalInterest - TotalInterestPaid | currency:
+                                selectedCurrency:'symbol':'1.0-0'}}
+                            </p> -->
+                    </div>
+                    <div class="col-md-6 text-center" *ngIf="extraPreEmi>=0">
+                        <p class="info-pay text-center">Tenure Completes</p>
+                        <span class="badge rounded-pill bg-primary custom-chip">{{table_list.length/12 | number :
+                            '1.1-1'}} Years</span>
+                        <!-- <p class="info-pay text-center">Loan Tenure Completes:</p>
+                            <p class="text-center payable"> {{table_list.length/12 | number : '1.1-1'}} Years
+                            </p> -->
                     </div>
                 </div>
             </div>
@@ -92,28 +144,196 @@
     </div>
     <!--  -->
 </div><br><br>
-<div class="tab conatiner">
+<!-- <div class="tab conatiner">
     <table class="table table-responsive table-hover table-bordered">
-        <thead class="table-dark">
+        <thead class="sticky-tab">
             <tr class="text-center" style="--bs-table-bg-type: #0d6efd;">
                 <th scope="col">Months</th>
-                <!-- <th scope="col">Extra EMI</th> -->
+                <th scope="col">Extra EMI</th>
                 <th scope="col">Principal</th>
                 <th scope="col">Interest</th>
-                <th scope="col">Total Paid</th>
+                <th scope="col">Total Payment</th>
                 <th scope="col">Balance</th>
+                <th scope="col">Loan Paid in %</th>
             </tr>
         </thead>
         <tbody class="text-center">
             <tr *ngFor="let item of table_list;let i=index">
                 <th scope="row">{{i+1}}</th>
-                <!-- <td>{{item.extraEmi}}</td> -->
+                <td [ngClass]="{'extra-emi': item.extra > 0}">{{item.extra | currency:
+                    selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{item.month_principal | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{item.monthly_interest | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{item.totalPaid | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{math.trunc(item.balance) | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
+                <td>{{item.balance_percentage | number : '1.2-2'}} %</td>
             </tr>
         </tbody>
     </table>
+    
+</div> -->
+<br>
+
+<!-- Table Collapse -->
+<div class="container tab-cont">
+    <div class="accordion" id="dynamicAccordion">
+        <!-- <table class="table table-responsive table-hover table-bordered">
+            <thead class="sticky-tab">
+                <tr class="text-center bg-tabs">
+                    <th scope="col" class="row-content-yr color-w">Years</th>
+                    <th scope="col" class="row-content color-w">Extra EMI</th>
+                    <th scope="col" class="row-content color-w">Principal</th>
+                    <th scope="col" class="row-content color-w">Interest</th>
+                    <th scope="col" class="row-content color-w">Total Payment</th>
+                    <th scope="col" class="row-content color-w">Balance</th>
+                    <th scope="col" class="row-content color-w m-remove">Completed %</th>
+                </tr>
+            </thead>
+        </table> -->
+        <div class="">
+            <table class="table table-responsive table-hover table-bordered">
+                <thead class="sticky-tab">
+                    <tr class="text-center bg-tabs">
+                        <th scope="col" class="row-content-yr color-w">Years</th>
+                        <th scope="col" class="row-content color-w">Extra EMI</th>
+                        <th scope="col" class="row-content color-w">Principal</th>
+                        <th scope="col" class="row-content color-w">Interest</th>
+                        <th scope="col" class="row-content color-w">Total Payment</th>
+                        <th scope="col" class="row-content color-w">Balance</th>
+                        <th scope="col" class="row-content color-w m-remove">Completed %</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="card" *ngFor="let item of yearsArray; let i = index">
+                <h5 class="accordion-header heading-h5" [attr.id]="'heading' + i">
+                    <div class="accordion" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'collapse' + i"
+                        [attr.aria-expanded]="i === 0 ? 'true' : 'false'">
+                        <!-- {{ i+1 }} -->
+                        <table class="table table-responsive table-hover table-data">
+                            <thead class="">
+                                <tr data-bs-toggle="tooltip" title="Click to expand" class="text-center bg-tabs1"
+                                    (click)="toggleRow(i)">
+                                    <td scope="col" class="row-content-yr">
+                                        <mat-icon class="remove-icon-collapse" aria-hidden="false"
+                                            aria-label="Example home icon" fontIcon="expand_more"
+                                            *ngIf="!item.expanded"></mat-icon>
+                                        <mat-icon class="remove-icon-collapse" aria-hidden="false"
+                                            aria-label="Example home icon" fontIcon="expand_less"
+                                            *ngIf="item.expanded"></mat-icon>
+                                        <!-- <span [ngClass]="{ 'expand-icon': !item.expanded, 'collapse-icon': item.expanded }">
+                                        {{ item.expanded ? '-' : '+' }}
+                                    </span> -->
+                                        {{i+1}}
+                                    </td>
+                                    <td scope="col" class="row-content">{{ calculateTotal(item,'extra') | currency:
+                                        selectedCurrency:'symbol':'1.0-0' }}</td>
+                                    <td scope="col" class="row-content">{{ calculateTotal(item,'principle') | currency:
+                                        selectedCurrency:'symbol':'1.0-0' }}</td>
+                                    <td scope="col" class="row-content">{{ calculateTotal(item,'interest') | currency:
+                                        selectedCurrency:'symbol':'1.0-0' }}</td>
+                                    <td scope="col" class="row-content">{{ calculateTotal(item,'totalP') | currency:
+                                        selectedCurrency:'symbol':'1.0-0' }}</td>
+                                    <td scope="col" class="row-content">{{ item[item.length - 1]?.balance | currency:
+                                        selectedCurrency:'symbol':'1.0-0' }}</td>
+                                    <td scope="col" class="row-content m-remove">{{ item[item.length -
+                                        1]?.balance_percentage | number : '1.2-2' }} %</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </h5>
+                <div [id]="'collapse' + i" *ngFor="let val of item; let j=index" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="'heading' + i">
+                    <div class="">
+                        <table class="table table-responsive table-hover table-bordered table-style">
+                            <tbody class="">
+                                <tr class="tr-stye text-center">
+                                    <td scope="col" class="row-content-yr">
+                                        <!-- {{j+1}} -->
+                                        <span *ngIf="j+1==1">Jan</span>
+                                        <span *ngIf="j+1==2">Feb</span>
+                                        <span *ngIf="j+1==3">Mar</span>
+                                        <span *ngIf="j+1==4">Apr</span>
+                                        <span *ngIf="j+1==5">May</span>
+                                        <span *ngIf="j+1==6">Jun</span>
+                                        <span *ngIf="j+1==7">Jul</span>
+                                        <span *ngIf="j+1==8">Aug</span>
+                                        <span *ngIf="j+1==9">Sept</span>
+                                        <span *ngIf="j+1==10">Oct</span>
+                                        <span *ngIf="j+1==11">Nov</span>
+                                        <span *ngIf="j+1==12">Dec</span>
+                                    </td>
+                                    <td scope="col" class="row-content" [ngClass]="{'extra-emi': val.extra > 0}">
+                                        {{val.extra
+                                        | currency:
+                                        selectedCurrency:'symbol':'1.0-0'}}</td>
+                                    <td scope="col" class="row-content">{{val.month_principal | currency:
+                                        selectedCurrency:'symbol':'1.0-0'}}
+                                    </td>
+                                    <td scope="col" class="row-content">{{val.monthly_interest | currency:
+                                        selectedCurrency:'symbol':'1.0-0'}}
+                                    </td>
+                                    <td scope="col" class="row-content">{{val.totalPaid | currency:
+                                        selectedCurrency:'symbol':'1.0-0'}}</td>
+                                    <td scope="col" class="row-content">{{math.trunc(val.balance) | currency:
+                                        selectedCurrency:'symbol':'1.0-0'}}</td>
+                                    <td scope="col" class="row-content">{{val.balance_percentage | number : '1.2-2'}} %
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <br><br>
+
+<div class="container">
+    <section>
+        <h2 class="text-left">What are the benefits of using home loan prepayment calculator?</h2>
+        <p class="text-para">
+            A home loan prepayment calculator can be a valuable tool for individuals who have taken out a home loan
+            (mortgage) to
+            finance the purchase of a house or property. It helps borrowers understand the impact of making additional
+            payments
+            towards their loan principal before the scheduled repayment term. Here are some benefits of using a home
+            loan prepayment
+            calculator
+        </p>
+        <h4 class="text-left"><b>Savings on Interest:</b></h4>
+        <p class="text-para">Making prepayments on your home loan reduces the outstanding principal amount. As the
+            principal
+            decreases, the interest charged on the remaining balance also decreases. The calculator helps you see how
+            much interest
+            you can save over the life of the loan by making extra payments.</p>
+
+        <h4 class="text-left"><b>Reduced Loan Tenure:</b></h4>
+        <p class="text-para">When you make additional payments, the loan's principal is reduced faster than the original
+            repayment schedule. This can lead to a shorter loan tenure. The calculator shows you how many months or
+            years you can
+            shave off your loan by making prepayments.</p>
+
+        <h4 class="text-left"><b>Financial Planning: </b></h4>
+        <p class="text-para">The calculator allows you to experiment with different prepayment amounts and frequencies.
+            This
+            helps you plan your finances and decide on the most suitable prepayment strategy that aligns with your
+            budget and
+            financial goals.</p>
+
+        <h4 class="text-left"><b>Debt Reduction: </b></h4>
+        <p class="text-para"> Prepaying a home loan can contribute to your overall debt reduction strategy, which can
+            lead to
+            improved financial security and reduced financial stress.</p>
+
+        <h4 class="text-left"><b>Peace of Mind:</b></h4>
+        <p class="text-para"> By seeing the tangible benefits of prepayment, borrowers can gain peace of mind, knowing
+            that they are
+            actively working towards reducing their debt burden and achieving financial stability.</p>
+    </section>
+</div><br><br>
+<!--  -->
