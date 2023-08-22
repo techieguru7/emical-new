@@ -1,8 +1,8 @@
 <div class="conatiner">
     <div class="dropdown-container">
-        <label for="dropdown" class="label-drp">Select Currency:</label>
-        <select [(ngModel)]="selectedCurrency">
-            <option *ngFor="let currency of currencies" [value]="currency" [value]="currency">{{currency}}</option>
+        <label for="dropdown" class="label-drp">Currency:</label>
+        <select [(ngModel)]="selectedCurrency" (change)="onCurrecySelect()">
+            <option *ngFor="let currency of currencies"  [value]="currency.name">{{currency.name}}</option>
         </select>
     </div>
     <div class="row">
@@ -15,33 +15,20 @@
                     <mat-tab label="Car Loan"> </mat-tab>
                 </mat-tab-group><br>
 
-                <div class="currency-css">
-                    <div class="dropdown">
-                        <!-- <select [(ngModel)]="selectedCurrency">
-                            <option *ngFor="let currency of currencies" [value]="currency" [value]="currency">{{currency}}</option>
-                        </select> -->
-                    </div>
-
-                    <!-- <mat-form-field appearance="fill">
-                        <mat-label>Select Currency</mat-label>
-                        <mat-select [(ngModel)]="selectedCurrency">
-                            <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency
-                                }}</mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
-                </div>
                 <div class="form-group">
                     <label for="loanAmount">Loan Amount</label>
                     <!-- <span class="currency">{{ selectedCurrency | currencySymbol }}</span> -->
-                    <input type="number" (input)="calculate()" appCommaSeparator [(ngModel)]="amount" mode="decimal"
+                    <div class="wrapper">
+                    <span class="prefix" *ngIf="currencySymbol">{{currencySymbol}}</span></div>
+                    <input type="number" [ngClass]="{inputPaddingcurrenct: currencySymbol=='CN¥' || currencySymbol=='RUB' || currencySymbol=='S$'}" (input)="calculate()"  [(ngModel)]="amount" mode="decimal"
                         locale="en-IN" maxlength="12" inputId="minmax" id="loanAmount" name="loanAmount" required>
-                    <p class="numTowords">{{ amount | numberToWords }}</p>
+                    <p class="numTowords">{{ words }}</p>
                     <br>
 
                     <!-- Slider -->
                     <input type="range" class="custom-range width-w" ngDefaultControl (mouseup)="calculate()"
-                        (input)="inputUpdate($event.target)" (touchend)="calculate()" [(ngModel)]="amount"
-                        max="100000000" step="50000" discrete>
+                        (input)="calculate()" (touchend)="calculate()" [(ngModel)]="amount"
+                        max="100000000" step="100000" discrete>
 
                     <!--  -->
                 </div>

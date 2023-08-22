@@ -1,33 +1,33 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-.width-w{
+.width-w {
   width: 100%;
 }
 .container1 {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #3f51b5 !important;
-    font-family: sans-serif;
-    font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5 !important;
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* label {
@@ -36,300 +36,298 @@ h1 {
     color: #555555;
 } */
 
-.label-drp{
+.label-drp {
   color: #3f51b5;
 }
 
 input[type="number"],
 input[type="text"] {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #dddddd;
-    border-radius: 2px;
-    transition: border-color 0.3s ease;
-    border: 1px solid #0d6efd;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  transition: border-color 0.3s ease;
+  border: 1px solid #0d6efd;
 }
 
 input[type="number"]:focus,
 input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
+  outline: none;
+  border-color: #007bff;
 }
 
 button {
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 input[readonly] {
-    background-color: #f7f7f7;
-    cursor: not-allowed;
+  background-color: #f7f7f7;
+  cursor: not-allowed;
 }
 
 /* Additional Styles for Result */
 #emiResult {
-    font-weight: bold;
-    color: #007bff;
-    text-align: center;
-    margin-top: 20px;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .form-group,
 button,
 #emiResult {
-    animation: fadeIn 1s ease;
+  animation: fadeIn 1s ease;
 }
 
-canvas{
+canvas {
+  width: 290px !important;
+  height: 290px !important;
+  display: inline !important;
+}
+.tab {
+  padding: 15px;
+  height: 500px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+.emi-txt {
+  color: dodgerblue;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 4px;
+  margin: 0px;
+}
 
-    width:290px !important;
-    height:290px !important;
-    display: inline !important;
-  
-  }
-  .tab{
-    padding: 15px;
-    height: 500px;
-    overflow-y: auto;
-    max-height: 500px;
-  }
-  .emi-txt {
-    color: dodgerblue;
-    font-weight: 600;
-    font-family: "Open Sans", sans-serif;
-    margin-bottom: 4px;
-    margin: 0px;
-  }
+.emi {
+  font-size: 32px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  color: var(--bs-form-valid-color);
+  font-weight: 600;
+}
+.currency-txt {
+  font-size: 30px;
+  font-family: ui-rounded;
+}
+.info-pay {
+  font-size: 16px;
+  color: #3f51b5 !important;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+}
 
-  .emi {
-    font-size: 32px;
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-    color: var(--bs-form-valid-color);
-    font-weight: 600;
-  }
-  .currency-txt {
-    font-size: 30px;
-    font-family: ui-rounded;
-  }
-  .info-pay {
-    font-size: 16px;
-    color: #3f51b5 !important;
-    font-weight: 500;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 5px;
-  }
-
-  /* Basic styles for the dropdown button */
+/* Basic styles for the dropdown button */
 .dropdown-btn {
-    padding: 10px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Style for the dropdown content (hidden by default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Show the dropdown content on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  .pad-15p{
-    padding: 15px;
-  }
-  .bg-tabs{
-    --bs-table-bg-type: #3f51b5 !important;
-    font-size: 12px;
-  }
-  .bg-tabs1{
-    /* --bs-table-bg-type: #9ba0f3ed; */
-    font-weight: 500;
-  }
-  /* Style each option/link within the dropdown */
-  .dropdown-content a {
-    display: block;
-    padding: 12px 16px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  /* Change the background color of options on hover */
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
-  /* Change the color of options when clicked */
-  .dropdown-content a:active {
-    background-color: #3f51b5 !important;
-    color: #fff;
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  .flex-center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .duration-input {
-    padding-right: 80px; /* Adjust this value to make space for the buttons */
-    width: 100%;
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .year-button,
-  .month-button {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    padding: 5px 10px;
-    border: none;
-    background-color: lightblue;
-    color: black;
-    cursor: pointer;
-    border-radius: 0px;
-  }
-  
-  .year-button {
-    right:0;
-  }
-  
-  .month-button {
-    right: 56px;
-  }
-  .active{
-    background-color:#3f51b5 !important;
-    color: white;
-  }
-  .tenure-info{
-    padding-top: 5px;
-    font-size: 12px;
-    color: cornflowerblue;
-  }
-  
-  /* Add your custom styles here */
-mat-select {
-    font-size: 12px !important; /* Decrease the font size as needed */
-  }
-  
-  mat-form-field {
-    width: 179px; /* Adjust the width of the form field as needed */
-    height: 72px;
-  }
-  
-  .mat-form-field-infix {
-    padding-top: 4px; /* Adjust the top padding of the input field as needed */
-    padding-bottom: 4px; /* Adjust the bottom padding of the input field as needed */
-  }
-  
-  .mat-option {
-    font-size: 12px; /* Decrease the font size of the options as needed */
-    height: 24px; /* Adjust the height of the options as needed */
-  }
-  
-  .mat-option.mat-selected {
-    background-color: #e3e3e3; /* Customize the background color of the selected option */
-  }
-  .currency-css{
-    display: flex;
-    justify-content: flex-end;
-  }
-  .currency{
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 4px;
-    font-weight: 500;
-  }
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
-  .payable{
-    color: white;
-    font-weight: 600;
-  }
-  .numTowords{
-    margin-bottom: 0px;
-    margin-left: 5px;
-    color: var(--bs-blue);
-    font-size: 12px;
-    font-family: monospace;
-  }
-  
-  .extra-emi{
-    background-color: #007bff;
-    color: white;
-  }
-  .sticky-tab{
-    position: sticky;
-    top: -16px;
-  }
-  .accord-bg{
-    height: 10px;
-    background-color: #b8bacf;
-    margin-top: -15px;
-    color: white;
-  }
-  .cards{
-    margin-bottom: 2px;
-    border-radius: 1px;
-    padding: 4px;
-  }
-  .table-style{
-    margin: 0px;
-  }
-  .tr-stye{
-    font-size: 12px;
-    --bs-table-bg-type: #c5c7ec4f;
-    font-size: 12px;
-  }
-  .heading-h5{
-    margin: 0px;
-  }
-  .table-data{
-    margin: 0px;
-  }
-  .expand-icon::before {
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .collapse-icon::before {
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  /* Add this CSS to your stylesheet or component's CSS file */
+/* Style for the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Show the dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.pad-15p {
+  padding: 15px;
+}
+.bg-tabs {
+  --bs-table-bg-type: #3f51b5 !important;
+  font-size: 12px;
+}
+.bg-tabs1 {
+  /* --bs-table-bg-type: #9ba0f3ed; */
+  font-weight: 500;
+}
+/* Style each option/link within the dropdown */
+.dropdown-content a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+/* Change the background color of options on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Change the color of options when clicked */
+.dropdown-content a:active {
+  background-color: #3f51b5 !important;
+  color: #fff;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.duration-input {
+  padding-right: 80px; /* Adjust this value to make space for the buttons */
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.year-button,
+.month-button {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  padding: 5px 10px;
+  border: none;
+  background-color: lightblue;
+  color: black;
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+.year-button {
+  right: 0;
+}
+
+.month-button {
+  right: 56px;
+}
+.active {
+  background-color: #3f51b5 !important;
+  color: white;
+}
+.tenure-info {
+  padding-top: 5px;
+  font-size: 12px;
+  color: cornflowerblue;
+}
+
+/* Add your custom styles here */
+mat-select {
+  font-size: 12px !important; /* Decrease the font size as needed */
+}
+
+mat-form-field {
+  width: 179px; /* Adjust the width of the form field as needed */
+  height: 72px;
+}
+
+.mat-form-field-infix {
+  padding-top: 4px; /* Adjust the top padding of the input field as needed */
+  padding-bottom: 4px; /* Adjust the bottom padding of the input field as needed */
+}
+
+.mat-option {
+  font-size: 12px; /* Decrease the font size of the options as needed */
+  height: 24px; /* Adjust the height of the options as needed */
+}
+
+.mat-option.mat-selected {
+  background-color: #e3e3e3; /* Customize the background color of the selected option */
+}
+.currency-css {
+  display: flex;
+  justify-content: flex-end;
+}
+.currency {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.payable {
+  color: white;
+  font-weight: 600;
+}
+.numTowords {
+  margin-bottom: 0px;
+  margin-left: 5px;
+  color: var(--bs-blue);
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.extra-emi {
+  background-color: #007bff;
+  color: white;
+}
+.sticky-tab {
+  position: sticky;
+  top: -16px;
+}
+.accord-bg {
+  height: 10px;
+  background-color: #b8bacf;
+  margin-top: -15px;
+  color: white;
+}
+.cards {
+  margin-bottom: 2px;
+  border-radius: 1px;
+  padding: 4px;
+}
+.table-style {
+  margin: 0px;
+}
+.tr-stye {
+  font-size: 12px;
+  --bs-table-bg-type: #c5c7ec4f;
+  font-size: 12px;
+}
+.heading-h5 {
+  margin: 0px;
+}
+.table-data {
+  margin: 0px;
+}
+.expand-icon::before {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.collapse-icon::before {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Add this CSS to your stylesheet or component's CSS file */
 .custom-range {
   -webkit-appearance: none;
   width: 100%;
@@ -338,8 +336,8 @@ mat-select {
   background: #ddd;
   outline: none;
   opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 .custom-range::-webkit-slider-thumb {
@@ -359,54 +357,57 @@ mat-select {
   background: #3f51b5 !important;
   cursor: pointer;
 }
-.row-content{
+.row-content {
   width: 100px;
 }
-.row-content-yr{
+.row-content-yr {
   width: 60px;
 }
-.color-w{
+.color-w {
   color: white;
   font-weight: 500;
 }
-.expand-icon{
+.expand-icon {
   height: 14px !important;
 }
-.mat-icon{
+.mat-icon {
   height: 16px;
 }
 
 @media only screen and (max-width: 768px) {
-  .row-content{
+  .row-content {
     width: 100px !important;
   }
-  .row-content-yr{
+  .row-content-yr {
     width: 80px !important;
   }
-  .m-remove{
+  .m-remove {
     display: none;
   }
-  .tab-cont{
+  .tab-cont {
     padding: 0px !important;
   }
-  .right-card-top-mrg{
+  .right-card-top-mrg {
     margin-top: 35px !important;
   }
-  .remove-icon-collapse{
+  .remove-icon-collapse {
     display: none;
   }
+  .custom-chip {
+    width: 100% !important;
+  }
 }
-.saved-card{
+.saved-card {
   background-color: #1f4bbf;
   border-radius: 0px;
-  padding: 8px
+  padding: 8px;
 }
-.custom-chip{
+.custom-chip {
   padding: 10px 16px 10px 16px;
-    font-weight: 400;
-    font-size: 14px;
-    width: 150px;
-    background-color: #3f51b5 !important;
+  font-weight: 400;
+  font-size: 14px;
+  width: 150px;
+  background-color: #3f51b5 !important;
 }
 
 /* Add some styling to the dropdown */
@@ -427,18 +428,17 @@ mat-select {
 
 /* Style the arrow icon */
 .dropdown::after {
-  
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
   font-size: 14px;
 }
-.label-freq{
+.label-freq {
   padding-left: 5px;
-    margin-top: 3px;
+  margin-top: 3px;
 }
-.text-para{
+.text-para {
   font-size: 14px;
   letter-spacing: 2px;
 }
@@ -446,23 +446,23 @@ mat-select {
 .dropdown-container {
   display: flex;
   align-items: center;
-  margin-left: 10px
+  margin-left: 10px;
 }
-.dropdown-select{
+.dropdown-select {
   width: 100%;
-    padding: 13px;
-    border: 1px solid #dddddd;
-    border-radius: 2px;
-    transition: border-color 0.3s ease;
-    border: 1px solid #0d6efd;
+  padding: 13px;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  transition: border-color 0.3s ease;
+  border: 1px solid #0d6efd;
 }
-select{
+select {
   word-wrap: normal;
   margin-left: 5px;
   width: 52px;
   border-radius: 3px;
 }
-.table-bordered{
+.table-bordered {
   margin-bottom: 0px;
 }
 
@@ -470,5 +470,25 @@ select{
 .dropdown-container label {
   margin: inherit;
   font-weight: bold;
+}
+
+.prefix {
+  position: absolute;
+  top: 14px; /* Example top position */
+  left: 5px; /* Example left position */
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.inputPaddingcurrenct {
+  padding-left: 14px;
+}
+
+.inputPaddingcurrenct{
+  padding-left: 35px !important;
+}
+.wrapper {
+  position: relative;
+  width: 100%; /* Occupy full width */
 }
 

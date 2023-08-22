@@ -6,6 +6,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+import { ToWords } from 'to-words';
+
+
 @Component({
   selector: 'app-emical',
   templateUrl: './emical.component.html',
@@ -18,7 +21,15 @@ export class EmicalComponent implements OnInit {
     { id: 3, name: 'Quaterly' },
   ];
 
-  currencies = ['USD', 'EUR', 'GBP', 'JPY', 'INR', 'CNY', 'RUB', 'SGD']; // Replace with your list of currency options
+  toWords = new ToWords({
+    localeCode: 'en-IN',
+    converterOptions: {
+      currency: false,
+      ignoreDecimal: false,
+      ignoreZeroCurrency: false,
+    },
+  });
+  currencies = [{name:'USD', id: 1}, {name:'EUR', id: 2}, {name:'GBP',id:3}, {name:'JPY', id:4},{name:'INR', id: 5}, {name:'CNY',id:6}, {name:'RUB',id:7}, {name:'SGD',id:8}]; // Replace with your list of currency options
   selectedCurrency: string = 'INR';
   ctx: any;
   config: any;
@@ -58,10 +69,12 @@ export class EmicalComponent implements OnInit {
   TotalInterestPaid: any;
   TotalPayableAmount: any;
   myType: any;
+  words :string =''
   width: any;
   height: any;
   myOptions: any;
   position: any;
+  currencySymbol ='₹'
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -84,17 +97,53 @@ export class EmicalComponent implements OnInit {
     return `${value}`;
   }
 
-  inputUpdate(val: any) {
-    // //console.log(val)
-    this.amount = val.value;
-    //this.calculate()
+  onCurrecySelect(){
+    if(this.selectedCurrency=='USD'){
+      this.currencySymbol ='$'
+    }else if(this.selectedCurrency=='EUR'){
+      this.currencySymbol ='€'
+    }
+    else if(this.selectedCurrency=='GBP'){
+      this.currencySymbol ='£'
+    }
+    else if(this.selectedCurrency=='JPY'){
+      this.currencySymbol ='¥'
+    }
+    else if(this.selectedCurrency=='INR'){
+      this.currencySymbol ='₹'
+    }
+    else if(this.selectedCurrency=='CNY'){
+      this.currencySymbol ='CN¥'
+    }
+    else if(this.selectedCurrency=='RUB'){
+      this.currencySymbol ='RUB'
+    }
+    else if(this.selectedCurrency=='SGD'){
+      this.currencySymbol ='S$'
+    }
+    console.log(this.selectedCurrency,this.currencySymbol)
+    
   }
 
-  selectFreq() {
-    //console.log(this.extraEmiFrequency);
+  // inputUpdate(val: any) {
+  //   this.amount = val.value;
+  //   this.calculate()
+  // }
+
+  // selectFreq() {
+  //   //console.log(this.extraEmiFrequency);
+  // }
+
+  convertoWords(){
+    if(this.amount){
+    this.words = this.toWords.convert(this.amount);
+  }else{
+    this.words ='Zero';
+  }
   }
 
   calculate() {
+   this.convertoWords()
     if (this.extraPreEmi && this.extraPreEmi > 12) {
       this.extraPreEmi = 0;
     }
@@ -104,8 +153,9 @@ export class EmicalComponent implements OnInit {
     if (this.tenure == 0) {
       this.tenure = 1;
     }
-    if (this.amount == 0 || this.amount == 10000000) {
+    if (this.amount == 0 || this.amount == 10000000 || this.amount <= 0) {
       this.amount = 1000000;
+      this.convertoWords()
     }
     if (this.tenureVal == 'Months' && this.tenure > 360) {
       this.tenure = 12;
