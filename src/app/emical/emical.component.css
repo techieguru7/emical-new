@@ -110,6 +110,20 @@ canvas {
   overflow-y: auto;
   max-height: 500px;
 }
+
+.tab::-webkit-scrollbar {
+  width: 6px; /* Adjust the width as needed */
+}
+
+.tab::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 3px; /* Round the edges of the thumb */
+}
+
+.tab::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+
 .emi-txt {
   color: dodgerblue;
   font-weight: 600;
@@ -198,6 +212,7 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .duration-input {
@@ -395,6 +410,9 @@ mat-form-field {
   }
   .custom-chip {
     width: 100% !important;
+  }
+  .sticky-tab {
+    top: -1px;
   }
 }
 .saved-card {

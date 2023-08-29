@@ -8,7 +8,6 @@ import {
 
 import { ToWords } from 'to-words';
 
-
 @Component({
   selector: 'app-emical',
   templateUrl: './emical.component.html',
@@ -29,7 +28,16 @@ export class EmicalComponent implements OnInit {
       ignoreZeroCurrency: false,
     },
   });
-  currencies = [{name:'USD', id: 1}, {name:'EUR', id: 2}, {name:'GBP',id:3}, {name:'JPY', id:4},{name:'INR', id: 5}, {name:'CNY',id:6}, {name:'RUB',id:7}, {name:'SGD',id:8}]; // Replace with your list of currency options
+  currencies = [
+    { name: 'USD', id: 1 },
+    { name: 'EUR', id: 2 },
+    { name: 'GBP', id: 3 },
+    { name: 'JPY', id: 4 },
+    { name: 'INR', id: 5 },
+    { name: 'CNY', id: 6 },
+    { name: 'RUB', id: 7 },
+    { name: 'SGD', id: 8 },
+  ]; // Replace with your list of currency options
   selectedCurrency: string = 'INR';
   ctx: any;
   config: any;
@@ -59,6 +67,7 @@ export class EmicalComponent implements OnInit {
   tenureInMonths: any;
   // charts
   monthsTenure: any;
+  isToggleOn = false;
   totalInterest: any;
   totalPayable: any;
   no_Months: any = [];
@@ -69,12 +78,13 @@ export class EmicalComponent implements OnInit {
   TotalInterestPaid: any;
   TotalPayableAmount: any;
   myType: any;
-  words :string =''
+  words: string = '';
   width: any;
   height: any;
   myOptions: any;
   position: any;
-  currencySymbol ='₹'
+  extraEmiMsg = '';
+  currencySymbol = '₹';
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,32 +107,25 @@ export class EmicalComponent implements OnInit {
     return `${value}`;
   }
 
-  onCurrecySelect(){
-    if(this.selectedCurrency=='USD'){
-      this.currencySymbol ='$'
-    }else if(this.selectedCurrency=='EUR'){
-      this.currencySymbol ='€'
+  onCurrecySelect() {
+    if (this.selectedCurrency == 'USD') {
+      this.currencySymbol = '$';
+    } else if (this.selectedCurrency == 'EUR') {
+      this.currencySymbol = '€';
+    } else if (this.selectedCurrency == 'GBP') {
+      this.currencySymbol = '£';
+    } else if (this.selectedCurrency == 'JPY') {
+      this.currencySymbol = '¥';
+    } else if (this.selectedCurrency == 'INR') {
+      this.currencySymbol = '₹';
+    } else if (this.selectedCurrency == 'CNY') {
+      this.currencySymbol = 'CN¥';
+    } else if (this.selectedCurrency == 'RUB') {
+      this.currencySymbol = 'RUB';
+    } else if (this.selectedCurrency == 'SGD') {
+      this.currencySymbol = 'S$';
     }
-    else if(this.selectedCurrency=='GBP'){
-      this.currencySymbol ='£'
-    }
-    else if(this.selectedCurrency=='JPY'){
-      this.currencySymbol ='¥'
-    }
-    else if(this.selectedCurrency=='INR'){
-      this.currencySymbol ='₹'
-    }
-    else if(this.selectedCurrency=='CNY'){
-      this.currencySymbol ='CN¥'
-    }
-    else if(this.selectedCurrency=='RUB'){
-      this.currencySymbol ='RUB'
-    }
-    else if(this.selectedCurrency=='SGD'){
-      this.currencySymbol ='S$'
-    }
-    console.log(this.selectedCurrency,this.currencySymbol)
-    
+    console.log(this.selectedCurrency, this.currencySymbol);
   }
 
   // inputUpdate(val: any) {
@@ -134,35 +137,45 @@ export class EmicalComponent implements OnInit {
   //   //console.log(this.extraEmiFrequency);
   // }
 
-  convertoWords(){
-    if(this.amount){
-    this.words = this.toWords.convert(this.amount);
-  }else{
-    this.words ='Zero';
-  }
+  convertoWords() {
+    if (this.amount) {
+      this.words = this.toWords.convert(this.amount);
+    } else {
+      this.words = 'Zero';
+    }
   }
 
-  calculate() {
-   this.convertoWords()
-    if (this.extraPreEmi && this.extraPreEmi > 12) {
+  // Validation on Input Fields
+  validationInputs() {
+    if (this.extraPreEmi > 12) {
       this.extraPreEmi = 0;
+      this.extraEmiMsg = 'Extra EMI Cannot be more than 12 months';
+      return;
+    } else {
+      this.extraEmiMsg = '';
     }
     this.TotalInterestPaid = 0;
     this.TotalPayableAmount = 0;
-    let count = 0;
     if (this.tenure == 0) {
       this.tenure = 1;
     }
-    if (this.amount == 0 || this.amount == 10000000 || this.amount <= 0) {
-      this.amount = 1000000;
-      this.convertoWords()
+    if (this.amount <= 0) {
+      this.convertoWords();
+      return;
     }
     if (this.tenureVal == 'Months' && this.tenure > 360) {
       this.tenure = 12;
     } else if (this.tenureVal == 'Years' && this.tenure > 30) {
       this.tenure = 1;
     }
+  }
+
+  calculate() {
+    this.convertoWords();
+    this.validationInputs();
+
     const principal = this.amount;
+    // rate of interest Formula
     const rateOfInterest = this.interestRate / 100 / 12;
     if (this.tenureVal == 'Years') {
       this.tenureInMonths = this.tenure * 12;
@@ -177,12 +190,6 @@ export class EmicalComponent implements OnInit {
     this.totalInterest = Math.round(this.totalInterest);
     this.totalPayable = 0;
     this.totalPayable = Number(this.amount) + Number(this.totalInterest);
-    ////console.log(this.totalPayable);
-    // if (this.tenureVal == 'y') {
-    //   this.totalPayable = this.emi * (this.tenure * 12) + this.extraPreEmi;
-    // } else {
-    //   this.totalPayable = this.emi * (this.tenure) + this.extraPreEmi;
-    // }
 
     this.monthNames = [
       'Jan',
@@ -218,10 +225,7 @@ export class EmicalComponent implements OnInit {
             this.balance_principal - this.monthly_principal_amount;
           if (this.extraPreEmi) {
             if (i % 12 == 0) {
-              this.balance_principal =
-                this.balance_principal - this.emi * this.extraPreEmi;
-              this.monthly_principal_amount =
-                this.monthly_principal_amount + this.emi * this.extraPreEmi;
+              this.extraEMIFunc(i);
             }
           }
         } else {
@@ -231,15 +235,7 @@ export class EmicalComponent implements OnInit {
             this.emi - this.monthly_interest_amount;
           this.balance_principal =
             this.balance_principal - this.monthly_principal_amount;
-          if (this.extraPreEmi) {
-            if (i % 12 == 0) {
-              this.balance_principal =
-                this.balance_principal - this.emi * this.extraPreEmi;
-              this.monthly_principal_amount =
-                this.monthly_principal_amount + this.emi * this.extraPreEmi;
-              ////console.log(this.balance_principal,count),
-            }
-          }
+              this.extraEMIFunc(i);
         }
         // For graph Data
         this.TotalInterestPaid =
@@ -267,7 +263,7 @@ export class EmicalComponent implements OnInit {
     //console.log(this.TotalInterestPaid,'r6')
     this.yearsArray = this.groupArray(this.table_list, 12);
 
-   // console.log(this.yearsArray);
+    // console.log(this.yearsArray);
 
     for (let index = 11; index < this.table_list.length; index += 12) {
       if (this.extraPreEmi) {
@@ -292,6 +288,15 @@ export class EmicalComponent implements OnInit {
     return groupedArray;
   }
 
+  extraEMIFunc(i:any) {
+    if (i % 12 == 0) {
+    this.balance_principal =
+      this.balance_principal - this.emi * this.extraPreEmi;
+    this.monthly_principal_amount =
+      this.monthly_principal_amount + this.emi * this.extraPreEmi;
+    }
+  }
+
   calculateTotal(group: any[], val: any): any {
     if (val == 'principle') {
       return group.reduce((total, item) => total + item.month_principal, 0);
@@ -312,13 +317,9 @@ export class EmicalComponent implements OnInit {
   }
 
   toggleRow(index: number): void {
-   // console.log(index);
+    // console.log(index);
     this.yearsArray[index].expanded = !this.yearsArray[index].expanded;
   }
-
-
-
-
 
   setYearsMonths(val: string) {
     this.tenureVal = val;

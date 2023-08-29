@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="container1">
-                <h1>EMI Calculator</h1>
+                <!-- <h1>EMI Calculator</h1> -->
                 <mat-tab-group (selectedTabChange)="tabChange($event)">
                     <mat-tab label="Home Loan"> </mat-tab>
                     <mat-tab label=" Personal Loan"> </mat-tab>
@@ -22,7 +22,8 @@
                     <span class="prefix" *ngIf="currencySymbol">{{currencySymbol}}</span></div>
                     <input type="number" [ngClass]="{inputPaddingcurrenct: currencySymbol=='CN¥' || currencySymbol=='RUB' || currencySymbol=='S$'}" (input)="calculate()"  [(ngModel)]="amount" mode="decimal"
                         locale="en-IN" maxlength="12" inputId="minmax" id="loanAmount" name="loanAmount" required>
-                    <p class="numTowords">{{ words }}</p>
+                    <p class="numTowords" *ngIf="selectedCurrency =='INR'">{{ words }} Rupees</p>
+                    <p class="numTowords" *ngIf="selectedCurrency !='INR'">{{ amount | numberToWords }}</p>
                     <br>
 
                     <!-- Slider -->
@@ -68,7 +69,7 @@
                             <label for="extraEmi">Pay Extra EMI</label>
                             <input type="number" [(ngModel)]="extraPreEmi" (input)="calculate()" id="extraEmi"
                                 name="extraEmi" required>
-                            <!-- <p class="tenure-info">Extra EMI is calculated at the end of each year</p> -->
+                            <p class="tenure-info error" *ngIf="extraEmiMsg">{{extraEmiMsg}}</p>
                         </div>
                         <!-- <div class="col-sm-6 col-xs-12">
                             <label for="freq" class="label-freq">EMI Frequency</label>
@@ -91,8 +92,9 @@
                 </div>
                 <!-- <canvas class="text-center" id="myChart"></canvas> -->
                 <h2 class="text-center emi-txt">Your Monthly EMI will be</h2><br>
-                <p class="emi" *ngIf="emi > 0"><span class="currency-txt"></span> {{emi| currency:
-                    selectedCurrency:'symbol':'1.0-0'}}</p><br>
+                <p class="emi" *ngIf="emi >= 0"><span class="currency-txt"></span> {{emi| currency:
+                    selectedCurrency:'symbol':'1.0-0'}}</p>
+                    <br>
                 <div class="row">
                     <div class="col-md-6 text-center">
                         <p class="info-pay text-center">Interest Payable :</p>
@@ -101,16 +103,19 @@
                     </div>
                     <div class="col-md-6 text-center">
                         <p class="info-pay text-center">Total Payable:</p>
-                        <span class="badge rounded-pill bg-primary custom-chip">{{TotalPayableAmount | currency:
+                        <span class="badge rounded-pill bg-primary custom-chip" *ngIf="TotalPayableAmount">{{TotalPayableAmount | currency:
                             selectedCurrency:'symbol':'1.0-0'}}</span>
+
+                            <span class="badge rounded-pill bg-primary custom-chip" *ngIf="!TotalPayableAmount">0</span>
                     </div>
                 </div><br>
                 <div class="row text-center" *ngIf="extraPreEmi>=0">
                     <div class="col-md-6 text-center">
                         <p class="info-pay text-center">Interest Saved</p>
-                        <span class="badge rounded-pill bg-primary custom-chip">{{totalInterest - TotalInterestPaid |
+                        <span class="badge rounded-pill bg-primary custom-chip" *ngIf="interestRate >= 0">{{totalInterest - TotalInterestPaid |
                             currency:
                             selectedCurrency:'symbol':'1.0-0'}}</span>
+                            <span class="badge rounded-pill bg-primary custom-chip" *ngIf="interestRate==null || !interestRate || interestRate <0">0</span>
 
                         <!-- <p class="info-pay text-center">Interest Saved on Extra EMI:</p>
                             <p class="text-center payable"> {{totalInterest - TotalInterestPaid | currency:
@@ -130,18 +135,28 @@
         </div>
     </div>
     <!--  -->
-</div><br><br>
-<!-- <div class="tab conatiner">
-    <table class="table table-responsive table-hover table-bordered">
+</div>
+<br><br><br>
+ <!-- Toggle -->
+ <div class="flex-center">
+    <div class="form-check form-switch">
+        <input class="form-check-input" [(ngModel)]="isToggleOn" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+        <label class="form-check-label" for="mySwitch">Show in Years</label>
+    </div>
+    </div>
+
+    <!--  -->
+<div class="container tab-cont tab" id="table_pdf" *ngIf="!isToggleOn">
+    <table class="table table-responsive table-hover table-bordered table-striped">
         <thead class="sticky-tab">
-            <tr class="text-center" style="--bs-table-bg-type: #0d6efd;">
-                <th scope="col">Months</th>
-                <th scope="col">Extra EMI</th>
-                <th scope="col">Principal</th>
-                <th scope="col">Interest</th>
-                <th scope="col">Total Payment</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Loan Paid in %</th>
+            <tr class="text-center bg-tabs">
+                <th scope="col" class="row-content-yr color-w">Months</th>
+                <th scope="col" class="row-content color-w">Extra EMI</th>
+                <th scope="col" class="row-content color-w">Principal</th>
+                <th scope="col" class="row-content color-w">Interest</th>
+                <th scope="col" class="row-content color-w">Total Payment</th>
+                <th scope="col" class="row-content color-w">Balance</th>
+                <th scope="col" class="row-content color-w">Completed %</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -153,16 +168,17 @@
                 <td>{{item.monthly_interest | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{item.totalPaid | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
                 <td>{{math.trunc(item.balance) | currency: selectedCurrency:'symbol':'1.0-0'}}</td>
-                <td>{{item.balance_percentage | number : '1.2-2'}} %</td>
+                <td scope="col" class="row-content">{{item.balance_percentage | number : '1.2-2'}} %
+                </td>
             </tr>
         </tbody>
     </table>
     
-</div> -->
+</div>
 <br>
-
+   
 <!-- Table Collapse -->
-<div class="container tab-cont">
+<div class="container tab-cont" *ngIf="isToggleOn">
     <div class="accordion" id="dynamicAccordion">
         <!-- <table class="table table-responsive table-hover table-bordered">
             <thead class="sticky-tab">
@@ -233,7 +249,7 @@
                 <div [id]="'collapse' + i" *ngFor="let val of item; let j=index" class="accordion-collapse collapse"
                     [attr.aria-labelledby]="'heading' + i">
                     <div class="">
-                        <table class="table table-responsive table-hover table-bordered table-style">
+                        <table class="table table-responsive table-hover table-bordered table-style table-striped">
                             <tbody class="">
                                 <tr class="tr-stye text-center">
                                     <td scope="col" class="row-content-yr">
