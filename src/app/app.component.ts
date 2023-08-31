@@ -16,7 +16,7 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-   // this.router.events.subscribe((event) => console.log(event));
+    // this.router.events.subscribe((event) => console.log(event));
 
     this.titleService.setTitle(
       'EMI Calculator for Home loan, Car loan & Personl loan'
@@ -30,7 +30,7 @@ export class AppComponent {
       {
         name: 'keywords',
         content:
-          'loan EMI calculator,Home Loans,Prepayment,Pay extra Emi,Loan Terms,Car Loans,Personal Loans, loan calculator,Interest Rate Calculator,Home loan EMI calculator for first time buyers, EMI calculator, loan repayment,how to save interest on loan, loan interest, loan amount calculator, Interest save, monthly EMI, Monthly EMI Calculation,emi Calculator,emi,loan,home loan,EMI Calculator App,emi,Loan,calculator,extra emi, car loan, personal loan,home loan emi,mortgage lenders,bank loan,calculator,EMI Calculator Online,Bank loan emi,Loan Interest Calculation,EMI,Home loan india',
+          'loan EMI calculator,Home Loans,emical,less interest on loan,Extra repayments calculator for loan,Easy EMI Calcualtor,Personal Loans, mortgage Extra repayments calculator,Interest Rate Calculator,Home loan EMI calculator for first time buyers, repayment on home loan emi, loan repayment,how to save interest on home loan,Emi frequency payment,loan amount calculator, monthly EMI, Quaterly Prepayment,Monthly EMI Calculation,emi Calculator,home loan,EMI Calculator App,calculator,extra emi,mumbai home loan, indian banks home loan,check online loan calculator,Bank loan emi,Loan Interest Calculation,Home loan india',
       },
       { name: 'canonical', href: 'https://emical.net/' },
       { name: 'robots', content: 'index, follow' },

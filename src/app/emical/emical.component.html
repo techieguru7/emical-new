@@ -65,18 +65,18 @@
                 <!-- Extra EMI -->
                 <div class="form-group">
                     <div class="row">
-                        <div class="">
+                        <div class="col-sm-6 col-xs-12">
                             <label for="extraEmi">Pay Extra EMI</label>
                             <input type="number" [(ngModel)]="extraPreEmi" (input)="calculate()" id="extraEmi"
                                 name="extraEmi" required>
                             <p class="tenure-info error" *ngIf="extraEmiMsg">{{extraEmiMsg}}</p>
                         </div>
-                        <!-- <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-xs-12">
                             <label for="freq" class="label-freq">EMI Frequency</label>
                             <select class="dropdown-select" (change)="selectFreq()" [(ngModel)]="extraEmiFrequency" id="freq" name="freq">
                                 <option [value]="item.id" *ngFor="let item of frequencydata">{{item.name}}</option>
                               </select>
-                        </div> -->
+                        </div>
                     </div>
                     <!--  -->
                 </div>
@@ -151,12 +151,12 @@
         <thead class="sticky-tab">
             <tr class="text-center bg-tabs">
                 <th scope="col" class="row-content-yr color-w">Months</th>
-                <th scope="col" class="row-content color-w">Extra EMI</th>
-                <th scope="col" class="row-content color-w">Principal</th>
-                <th scope="col" class="row-content color-w">Interest</th>
-                <th scope="col" class="row-content color-w">Total Payment</th>
-                <th scope="col" class="row-content color-w">Balance</th>
-                <th scope="col" class="row-content color-w">Completed %</th>
+                <th scope="col" class="row-content color-w">Extra EMI <span *ngIf="extraPreEmi !=0">(C)</span></th>
+                <th scope="col" class="row-content color-w">Principal (A)</th>
+                <th scope="col" class="row-content color-w">Interest (B)</th>
+                <th scope="col" class="row-content color-w">Total Payment (A+B<span *ngIf="extraPreEmi !=0">+C</span>)</th>
+                <th scope="col" class="row-content color-w balance-color">Balance</th>
+                <th scope="col" class="row-content color-w completed-color">Completed %</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -199,11 +199,11 @@
                     <tr class="text-center bg-tabs">
                         <th scope="col" class="row-content-yr color-w">Years</th>
                         <th scope="col" class="row-content color-w">Extra EMI</th>
-                        <th scope="col" class="row-content color-w">Principal</th>
-                        <th scope="col" class="row-content color-w">Interest</th>
-                        <th scope="col" class="row-content color-w">Total Payment</th>
-                        <th scope="col" class="row-content color-w">Balance</th>
-                        <th scope="col" class="row-content color-w m-remove">Completed %</th>
+                        <th scope="col" class="row-content color-w">Principal (A)</th>
+                        <th scope="col" class="row-content color-w">Interest (B)</th>
+                        <th scope="col" class="row-content color-w">Total Payment (A+B<span *ngIf="extraPreEmi !=0">+C</span>)</th>
+                        <th scope="col" class="row-content color-w balance-color">Balance</th>
+                        <th scope="col" class="row-content color-w m-remove completed-color">Completed %</th>
                     </tr>
                 </thead>
             </table>

@@ -15,7 +15,7 @@ import { ToWords } from 'to-words';
 })
 export class EmicalComponent implements OnInit {
   frequencydata = [
-    { id: 1, name: 'Annualy' },
+    { id: 1, name: 'Annually' },
     { id: 2, name: 'Half-Yearly' },
     { id: 3, name: 'Quaterly' },
   ];
@@ -57,7 +57,7 @@ export class EmicalComponent implements OnInit {
   convertTxt = '';
   data = {};
   plusbtnSign: any;
-  extraEmiFrequency: any = 0;
+  extraEmiFrequency: any = 1;
 
   @Input() amount = 5000000;
   @Input() interestRate = 9;
@@ -77,6 +77,7 @@ export class EmicalComponent implements OnInit {
   panelOpenState = false;
   TotalInterestPaid: any;
   TotalPayableAmount: any;
+  frequent:any = 12;
   myType: any;
   words: string = '';
   width: any;
@@ -133,9 +134,23 @@ export class EmicalComponent implements OnInit {
   //   this.calculate()
   // }
 
-  // selectFreq() {
-  //   //console.log(this.extraEmiFrequency);
-  // }
+  selectFreq() {
+    console.log(this.extraEmiFrequency);
+    // Annually extra emi
+    if(this.extraEmiFrequency==1){
+      this.frequent = 12
+      
+    } // Half yearly extra emi
+    else if(this.extraEmiFrequency==2){
+      this.frequent = 6
+
+    } // Quaterly extra emi
+    else if(this.extraEmiFrequency==3){
+      this.frequent = 4
+    }
+    this.extraPreEmi =0
+    this.calculate()
+  }
 
   convertoWords() {
     if (this.amount) {
@@ -224,9 +239,7 @@ export class EmicalComponent implements OnInit {
           this.balance_principal =
             this.balance_principal - this.monthly_principal_amount;
           if (this.extraPreEmi) {
-            if (i % 12 == 0) {
               this.extraEMIFunc(i);
-            }
           }
         } else {
           this.monthly_interest_amount =
@@ -265,7 +278,7 @@ export class EmicalComponent implements OnInit {
 
     // console.log(this.yearsArray);
 
-    for (let index = 11; index < this.table_list.length; index += 12) {
+    for (let index = this.frequent-1; index < this.table_list.length; index += this.frequent) {
       if (this.extraPreEmi) {
         for (let j = 0; j < this.extraPreEmi; j++) {
           //  this.table_list[index]['balance'] -= this.emi * this.extraPreEmi;
@@ -289,7 +302,7 @@ export class EmicalComponent implements OnInit {
   }
 
   extraEMIFunc(i:any) {
-    if (i % 12 == 0) {
+    if (i % this.frequent == 0) {
     this.balance_principal =
       this.balance_principal - this.emi * this.extraPreEmi;
     this.monthly_principal_amount =

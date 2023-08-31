@@ -414,6 +414,10 @@ mat-form-field {
   .sticky-tab {
     top: -1px;
   }
+  .label-freq{
+    padding-left: 0px !important;
+    margin-top: 12px !important;
+  }
 }
 .saved-card {
   background-color: #1f4bbf;
@@ -473,6 +477,7 @@ mat-form-field {
   border-radius: 2px;
   transition: border-color 0.3s ease;
   border: 1px solid #0d6efd;
+  margin-left: 0px;
 }
 select {
   word-wrap: normal;
@@ -509,4 +514,9 @@ select {
   position: relative;
   width: 100%; /* Occupy full width */
 }
-
+.balance-color{
+  --bs-table-bg-type: green;
+}
+.completed-color{
+  --bs-table-bg-type: darkmagenta;
+}
