@@ -213,7 +213,7 @@
                         [attr.data-bs-target]="'#collapse' + i" [attr.aria-controls]="'collapse' + i"
                         [attr.aria-expanded]="i === 0 ? 'true' : 'false'">
                         <!-- {{ i+1 }} -->
-                        <table class="table table-responsive table-hover table-data">
+                        <table class="table table-responsive table-hover table-data table-striped">
                             <thead class="">
                                 <tr data-bs-toggle="tooltip" title="Click to expand" class="text-center bg-tabs1"
                                     (click)="toggleRow(i)">
